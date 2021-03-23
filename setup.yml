@@ -1,0 +1,17 @@
+- hosts: localhost 
+  roles:
+  - name: "Launch ec2-instance"
+    role: "/etc/ansible/roles/ec2"
+
+- hosts: "tag_Name_K8S_Master"
+  roles:
+  - name: "k8S_Master"
+    role: "/etc/ansible/roles/k8s-master"
+
+- hosts: ["tag_Name_K8S_Node1", "tag_Name_K8S_Node2"]
+  vars_prompt:
+      - name: joincmd
+        prompt: "Enter the command to join the worker nodes to the master nodes- "
+        private: no
+  roles:
+  - role: "/etc/ansible/roles/k8s-worker"
