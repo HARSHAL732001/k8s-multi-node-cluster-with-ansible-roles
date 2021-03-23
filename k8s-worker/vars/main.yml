@@ -1,0 +1,11 @@
+---
+# vars file for k8s-worker
+
+package_name:
+        - "docker"
+        - "kubelet"
+        - "kubeadm"
+        - "kubectl"
+package:
+        - "docker"
+        - "kubelet"

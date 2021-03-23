@@ -1,0 +1,46 @@
+---
+# tasks file for k8s-worker
+
+- debug:
+      msg: "Now configuring the worker nodes.."
+
+- name: "Configuring repository for K8s"
+  yum_repository:
+            name: "K8s-repo"
+            description: "Repository for K8s"
+            baseurl: "https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64"
+            gpgcheck: no
+
+- name: "Installing Software"
+  package:
+          name: "{{ item }}"
+          state: present
+  loop: "{{ package_name }}"
+- name: "Starting services"
+  service:
+          name:  "{{ item }}"
+          state: started
+  loop: "{{ package }}"
+
+- name: "Changing the driver to systemd"
+  copy:
+            dest: "/etc/docker/daemon.json"
+            content: '{
+                      "exec-opts": ["native.cgroupdriver=systemd"]
+                      }'
+
+- name: "Restarting docker service"
+  service:
+            name: "docker"
+            state: restarted
+- name: "Installing iproute-tc software"
+  package:
+            name: "iproute-tc"
+            state: present
+- name: "Bridge to 1"
+  shell: echo "1" > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+- name: "Joining the K8s worker node to the master node"
+  command: "{{ joincmd }}"
+- debug:
+        msg: "Hurry! Instances are configured as worker nodes "

@@ -1,0 +1,18 @@
+---
+# vars file for ec2
+#
+#
+#
+key_name: "k8skeypair"
+instance_type: "t2.micro"
+image_id: "ami-0533f2ba8a1995cf9"
+count: 1
+subnet_id: "subnet-0e60dc51"
+region: "us-east-1"
+sg_group_id: "sg-3f75500f"
+aws_access_key: "aws_access_key"
+aws_secret_key: "aws_secret_key"
+OS_name:
+     - "K8S_Master"
+     - "K8S_Node1"
+     - "K8S_Node2"
