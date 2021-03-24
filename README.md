@@ -4,16 +4,17 @@ Build a Kubernetes cluster using Ansible with kubeadm. The goal is to easily ins
 
 # System requirements:
 
-1.Deployment environment must have Ansible 2.9.0+ 
-2.Master and nodes must have passwordless SSH access
+Deployment environment must have Ansible 2.9.0+<br/>
+Master and nodes must have passwordless SSH access</br>
 
 # Verification:
 
-The playbook will download /etc/kubernetes/admin.conf file to $HOME/admin.conf.
+The playbook will download /etc/kubernetes/admin.conf file to $HOME/admin.conf.<br/>
 
->> Login to the master node.
->> Verify cluster is fully running using kubectl:
+>> Login to the master node.<br/>
+>> Verify cluster is fully running using kubectl:(<-- two spaces)
  
-   1.kubectl get nodes
-   2.kubectl get pods
-   3.kubectl get pods -n "kube-system"
+   [snippet]
+   1.kubectl get nodes<br/>
+   2.kubectl get pods<br/>
+   3.kubectl get pods -n "kube-system"<br/>
